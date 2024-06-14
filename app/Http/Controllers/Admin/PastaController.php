@@ -19,21 +19,26 @@ class PastaController extends Controller {
      * Show the form for creating a new resource.
      */
     public function create() {
-        //
+        return view('pastas.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request) {
-        //
+        // Prelevo tutti i dati dal request e ottengo array associativo
+        $data = $request->all();
+        $pasta = new Pasta();
+        $pasta->fill($data);
+        $pasta->save();
+        return redirect()->route('pastas.show', ['pasta' => $pasta->id]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id) {
-        $pasta = Pasta::findOrFail($id);
+    public function show(Pasta $pasta) {
+        // $pasta = Pasta::findOrFail($id);
         return view('pastas.show', compact('pasta'));
     }
 

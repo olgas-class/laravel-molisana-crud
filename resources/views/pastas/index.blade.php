@@ -3,6 +3,9 @@
 @section('content')
   <div class="container">
     <h1>Lista delle paste</h1>
+    <div class="d-flex justify-content-end py-3">
+      <a class="btn btn-success" href="{{ route('pastas.create') }}">Aggiungi una pasta</a>
+    </div>
     <table class="table">
       <thead class="striped">
         <tr>
