@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PastaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+
+
+Route::get('/pastas', [PastaController::class, 'index'])->name('pastas.index');
+Route::get('/pastas/{pasta}', [PastaController::class, 'show'])->name('pastas.show');
