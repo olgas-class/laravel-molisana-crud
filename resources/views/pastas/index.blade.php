@@ -21,8 +21,16 @@
             <th scope="row">{{ $pasta->id }}</th>
             <td>{{ $pasta->title }}</td>
             <td>{{ $pasta->type }}</td>
-            <td>
+            <td class="d-flex gap-3">
               <a class="btn btn-success" href="{{ route('pastas.show', ['pasta' => $pasta->id]) }}">Dettagli</a>
+              <a class="btn btn-warning" href="{{ route('pastas.edit', ['pasta' => $pasta->id]) }}">Modifica</a>
+
+              {{-- Form per cancellare elemento --}}
+              <form action="{{ route('pastas.destroy', ['pasta' => $pasta->id]) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-danger" type="submit">Cancella</button>
+              </form>
             </td>
           </tr>
         @endforeach

@@ -28,9 +28,10 @@ class PastaController extends Controller {
     public function store(Request $request) {
         // Prelevo tutti i dati dal request e ottengo array associativo
         $data = $request->all();
-        $pasta = new Pasta();
-        $pasta->fill($data);
-        $pasta->save();
+        // $pasta = new Pasta();
+        // $pasta->fill($data);
+        // $pasta->save();
+        $pasta = Pasta::create($data);
         return redirect()->route('pastas.show', ['pasta' => $pasta->id]);
     }
 
@@ -45,21 +46,31 @@ class PastaController extends Controller {
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) {
-        //
+    public function edit(Pasta $pasta) {
+        // $pasta = Pasta::findOrFail($id);
+        return view('pastas.edit', compact('pasta'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id) {
-        //
+    public function update(Request $request, Pasta $pasta) {
+        // Da request ci arrivano i dati nuovi da inserire nel record
+        $data = $request->all();
+
+        // nella variabile $pasta troveremo i dati vecchi
+        // dd($data, $pasta);
+
+        $pasta->update($data); // per fare questa operazione serve $fillable nel model
+
+        return redirect()->route('pastas.show', ['pasta' => $pasta->id]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id) {
-        //
+    public function destroy(Pasta $pasta) {
+        $pasta->delete();
+        return redirect()->route('pastas.index');
     }
 }
