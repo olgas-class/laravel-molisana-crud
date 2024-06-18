@@ -17,5 +17,12 @@
       <h4>Descrizione</h4>
       <p>{{ $pasta->description }}</p>
     </div>
+    {{-- Actions --}}
+    <div>
+      @include('partials.delete-pasta-form')
+    </div>
   </div>
+
+  {{-- Modal di cancellazione --}}
+  @include('partials.delete-pasta-modal')
 @endsection

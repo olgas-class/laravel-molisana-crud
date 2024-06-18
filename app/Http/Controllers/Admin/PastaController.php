@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePastaRequest;
+use App\Http\Requests\UpdatePastaRequest;
 use App\Models\Pasta;
 use Illuminate\Http\Request;
 
@@ -25,7 +27,18 @@ class PastaController extends Controller {
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {
+    public function store(StorePastaRequest $request) {
+        // In alternativa per organizzare meglio il codice creo la classe StorePastaRequest per applicare le validazioni
+        // Controllo che i dati sono corretti
+        // $request->validate([
+        //     'title' => ['required', 'min:3'],
+        //     'type' => ['required'],
+        //     'cooking_time' => ['required'],
+        //     'weight' => ['required'],
+        //     'description' => ['min:10']
+        // ], [
+        //     'title.required' => 'Il titolo non può essere vuoto'
+        // ]);
         // Prelevo tutti i dati dal request e ottengo array associativo
         $data = $request->all();
         // $pasta = new Pasta();
@@ -54,7 +67,7 @@ class PastaController extends Controller {
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pasta $pasta) {
+    public function update(UpdatePastaRequest $request, Pasta $pasta) {
         // Da request ci arrivano i dati nuovi da inserire nel record
         $data = $request->all();
 
