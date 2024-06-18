@@ -26,10 +26,10 @@
               <a class="btn btn-warning" href="{{ route('pastas.edit', ['pasta' => $pasta->id]) }}">Modifica</a>
 
               {{-- Form per cancellare elemento --}}
-              <form action="{{ route('pastas.destroy', ['pasta' => $pasta->id]) }}" method="POST">
+              <form action="{{ route('pastas.destroy', ['pasta' => $pasta->id]) }}" method="POST" class="delete-form">
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-danger" type="submit">Cancella</button>
+                <button class="btn btn-danger" type="submit" data-pasta-title="{{ $pasta->title }}">Cancella</button>
               </form>
             </td>
           </tr>
@@ -37,4 +37,8 @@
       </tbody>
     </table>
   </div>
+
+
+  {{-- Confirmation modal --}}
+  @include('partials.delete-pasta-modal')
 @endsection
